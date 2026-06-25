@@ -11,7 +11,7 @@ Bootstrap a new Bun + TypeScript monorepo. Copy templates from references — do
 
 | Reference | Contents |
 |-----------|----------|
-| [monorepo.md](references/monorepo.md) | workspaces, catalog, turbo |
+| [monorepo.md](references/monorepo.md) | workspaces, catalog, turbo, tsgo |
 | [tsconfig.md](references/tsconfig.md) | `tsconfig.json` |
 | [gitignore.md](references/gitignore.md) | `.gitignore` |
 
@@ -19,7 +19,7 @@ Bootstrap a new Bun + TypeScript monorepo. Copy templates from references — do
 
 1. Get repo name, npm scope, and initial package names.
 2. Create root files and `packages/<name>/src/` per package — subpath `exports` only, no barrel `index.ts`.
-3. Wire workspaces, catalog, and turbo per [monorepo.md](references/monorepo.md).
+3. Wire workspaces, catalog, turbo, and per-package tsgo typecheck per [monorepo.md](references/monorepo.md).
 4. Run `bun install && bun run check && bun run typecheck`.
 
 ## Rules
@@ -27,3 +27,4 @@ Bootstrap a new Bun + TypeScript monorepo. Copy templates from references — do
 - Bun only. `private: true`, `type: "module"` everywhere.
 - Internal deps: `workspace:*`. Shared versions: root `catalog` + `"catalog:"`.
 - Same [tsconfig.md](references/tsconfig.md) at root and in each package.
+- Typechecking uses `tsgo -b --noEmit` from `@typescript/native-preview`, not `tsc`.
