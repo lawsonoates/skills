@@ -1,6 +1,8 @@
 ---
 name: setup-monorepo
-description: Scaffold a new Bun monorepo (turbo, tsgo, ultracite). Triggers: setup monorepo, init monorepo, bun workspace. Use with /setup-monorepo.
+description: >
+  Scaffold a new Bun monorepo (turbo, tsgo, ultracite). Triggers: setup monorepo,
+  init monorepo, bun workspace. Use with /setup-monorepo.
 ---
 
 # Setup Monorepo
