@@ -33,7 +33,7 @@ Orbs run in a remote clone at `/home/user/workspace/repo` and cannot see local f
    - `amp sol`: mode `sol-high` (user plugin, GPT-6.1 Sol at high effort). Header shows "sol-high".
    - `amp claude`: mode `external-agent:claude-code`. Header shows "claude code · claude opus 5.5 · high effort".
    An unknown `-m` silently falls back to `medium`, so check the header shows the mode and "In the Orb". List modes with `amp plugins list | grep "agent mode"` and `amp config external-agents list`.
-3. The prompt says: work in this orb checkout, fetch origin, create `<branch>` off `origin/main` here. Orb git defaults to `Amp <amp@ampcode.com>`, so the prompt must also say to run `git config user.name "lawsonoates"` and `git config user.email "lawsonoates@gmail.com"` before the first commit.
+3. The prompt says: work in this orb checkout, fetch origin, create `<branch>` off `origin/main` here. Orb git defaults to `Amp <amp@ampcode.com>`, so the prompt must also say to run `git config user.name "Lawson Oates"` and `git config user.email "lawsonoates@gmail.com"` before the first commit.
 
 ## Prompt
 
@@ -41,7 +41,7 @@ Orbs run in a remote clone at `/home/user/workspace/repo` and cannot see local f
 - Implement <ticket> "<title>": <url>. Read the issue first. Branch and location as above.
 - The user's extra instructions, verbatim.
 - Commit, push and open a PR that links the issue and fills `.github/pull_request_template.md` with human confirmation unchecked. Conventional Commits with `[TICKET]` prefix. Do NOT merge, do NOT enable auto-merge.
-- Author: only `lawsonoates <lawsonoates@gmail.com>` for author and committer, gh as lawsonoates, no co-author trailers. Stop and ask if any other identity would be used.
+- Author: only `Lawson Oates <lawsonoates@gmail.com>` for author and committer, gh as lawsonoates, no co-author trailers. Stop and ask if any other identity would be used.
 - pnpm may rewrite `pnpm-lock.yaml`. Restore it and never commit unrelated lockfile churn.
 - Name sibling issues launched in the same batch and say to stay in scope.
 - Exploration issues: write an uncommitted `<TICKET>-report.md` at the repo root, with no implementation, commit or PR.
