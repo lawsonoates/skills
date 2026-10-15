@@ -8,7 +8,7 @@ disable-model-invocation: true
 
 Load the herdr skill first (`~/.agents/skills/herdr/SKILL.md`) for CLI details.
 
-Input: Linear issue URLs, plus optional agent choice (`claude` default, `amp`) and extra per-issue instructions. Needs herdr: check `test "${HERDR_ENV:-}" = 1`. Workspace is the current one (`herdr pane list` shows it). Launch issues in parallel where possible.
+Input: Linear issue URLs, plus optional agent choice (`claude` default, `amp sol` or `amp claude`) and extra per-issue instructions. Needs herdr: check `test "${HERDR_ENV:-}" = 1`. Workspace is the current one (`herdr pane list` shows it). Launch issues in parallel where possible.
 
 ## Names
 
@@ -29,8 +29,11 @@ Ticket `OPT-12345` gives:
 Orbs run in a remote clone at `/home/user/workspace/repo` and cannot see local folders. Make no worktree.
 
 1. `herdr tab create --workspace <ws> --cwd /Users/lawsonoates/support --label "<label>" --no-focus`
-2. `herdr agent start <agent> --kind amp --pane <pane> --timeout 60000 -- --executor orb -m gpt61s`. Mode keys are short. An unknown `-m` silently falls back to `medium`, so check that the pane header shows "gpt-6.1 sol" and "In the Orb". List keys with `amp plugins list | grep "agent mode"`.
-3. The prompt says: work in this orb checkout, fetch origin, create `<branch>` off `origin/main` here. Orb git defaults to Amp's identity, so the prompt must also say to run `git config user.name "Lawson Oates"` and `git config user.email "lawson.oates@lorikeetcx.ai"` before the first commit, and to add no Amp co-author trailer.
+2. `herdr agent start <agent> --kind amp --pane <pane> --timeout 60000 -- --executor orb -m <mode>`, both on high effort:
+   - `amp sol`: mode `sol-high` (user plugin, GPT-6.1 Sol at high effort). Header shows "sol-high".
+   - `amp claude`: mode `external-agent:claude-code`. Header shows "claude code · claude opus 5.5 · high effort".
+   An unknown `-m` silently falls back to `medium`, so check the header shows the mode and "In the Orb". List modes with `amp plugins list | grep "agent mode"` and `amp config external-agents list`.
+3. The prompt says: work in this orb checkout, fetch origin, create `<branch>` off `origin/main` here. Orb git defaults to `Amp <amp@ampcode.com>`, so the prompt must also say to run `git config user.name "lawsonoates"` and `git config user.email "lawsonoates@gmail.com"` before the first commit.
 
 ## Prompt
 
@@ -38,7 +41,7 @@ Orbs run in a remote clone at `/home/user/workspace/repo` and cannot see local f
 - Implement <ticket> "<title>": <url>. Read the issue first. Branch and location as above.
 - The user's extra instructions, verbatim.
 - Commit, push and open a PR that links the issue and fills `.github/pull_request_template.md` with human confirmation unchecked. Conventional Commits with `[TICKET]` prefix. Do NOT merge, do NOT enable auto-merge.
-- Author: only the lawsonoates GitHub account, "Lawson Oates <lawson.oates@lorikeetcx.ai>", gh as lawsonoates. Stop and ask if any other identity would be used.
+- Author: only `lawsonoates <lawsonoates@gmail.com>` for author and committer, gh as lawsonoates, no co-author trailers. Stop and ask if any other identity would be used.
 - pnpm may rewrite `pnpm-lock.yaml`. Restore it and never commit unrelated lockfile churn.
 - Name sibling issues launched in the same batch and say to stay in scope.
 - Exploration issues: write an uncommitted `<TICKET>-report.md` at the repo root, with no implementation, commit or PR.
