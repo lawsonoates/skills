@@ -8,7 +8,7 @@ disable-model-invocation: true
 
 Load the herdr skill first (`~/.agents/skills/herdr/SKILL.md`) for CLI details.
 
-Input: Linear issue URLs, plus optional agent choice (`claude` default, `amp sol` or `amp claude`) and extra per-issue instructions. Needs herdr: check `test "${HERDR_ENV:-}" = 1`. Workspace is the current one (`herdr pane list` shows it). Launch issues in parallel where possible.
+Input: Linear issue URLs, plus optional agent choice (`claude` default, `amp sol` or `amp claude`) and extra per-issue instructions. Needs herdr: check `test "${HERDR_ENV:-}" = 1`. Tabs go in this session's own workspace by default: `<ws>` is `$HERDR_WORKSPACE_ID`. Never take it from `herdr pane list`, which lists every workspace. Use another workspace only when the user names one. If a tab lands in the wrong workspace, move it with `herdr pane move <pane> --new-tab --workspace <ws> --label "<label>" --no-focus`, which keeps the agent running. Launch issues in parallel where possible.
 
 ## Names
 
